@@ -1,0 +1,94 @@
+﻿@model EntityLayer.Concrete.Loan
+
+@{
+    ViewData["Title"] = "LoanAdd";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h1>New Loan</h1>
+
+
+
+<form id="myForm" method="post" asp-controller="Loan" asp-action="LoanAdd">
+    <div>
+        <div>
+            <p style="float:left;">Client</p>
+            <div style="margin-left:200px;">
+
+                @Html.DropDownListFor(x => x.ClientID, (List<SelectListItem>)ViewBag.clients)
+
+            </div>
+        </div>
+        <br />
+        <div>
+
+        </div>
+        <br />
+        <div>
+            <p style="float:left;">Loan Amount</p>
+            <div style="margin-left:200px;">
+                <input type="text" id="Amount" name="Amount" />
+                <span asp-validation-for="Amount"></span>
+            </div>
+        </div>
+        <br />
+        <div>
+            <p style="float:left;">Loan Period(months)</p>
+            <select style="margin-left:40px;width:200px;" id="LoanPeriod" name="LoanPeriod">
+
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+
+            </select>
+            <span asp-validation-for="LoanPeriod"></span>
+        </div>
+        <br />
+        <div>
+            <p style="float:left;">Monthly interest rate</p>
+            <div style="margin-left:200px;">
+                <input type="text" id="InterestRate" name="InterestRate" />
+            </div>
+        </div>
+        <br />
+        <br />
+        <div>
+
+            <div style="margin-left:220px;">
+                <input type="submit" id="post" value="Add Loan" />
+            </div>
+        </div>
+
+    </div>
+</form>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#post").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Loan/LoanAdd",
+                    data: { "ClientID": $("#Name").val(), "Amount": $("#Amount").val(), "LoanPeriod": $("#LoanPeriod").val(), }, "InterestRate": $("#InterestRate").val()
+                }
+                });
+            });
+    </script>
+
+}
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

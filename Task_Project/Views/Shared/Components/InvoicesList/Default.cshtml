@@ -1,0 +1,53 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Invoices>
+
+
+<br />
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                Invoices No
+            </th>
+            <th>
+                Due Date
+            </th>
+            <th>
+                Amount
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.InvoicesID
+                </td>
+                <td>
+                    @item.InvoiceNr
+                </td>
+                <td>
+                    @item.DueDate.ToShortDateString()
+                </td>
+                <td>
+                    @item.Amount
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<div style="margin-left:630px;">
+    <p style="float:left;margin-right:50px;">Total interest</p>
+    <button>@ViewBag.total</button></>
+</div>
+<br />
+<br />
+
+

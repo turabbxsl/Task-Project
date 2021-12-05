@@ -1,0 +1,55 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Loan>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Loan List</h1>
+
+<p>
+    <a asp-action="LoanAdd">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Client ID
+            </th>
+            <th>
+                Client
+            </th>
+            <th>
+                Loan Amount
+            </th>
+            <th>
+               Payout Date
+            </th>
+  
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.Client.Name
+            </td>
+            <td>
+                @item.Client.Name
+            </td>
+            <td>
+                @item.Amount
+            </td>
+            <td>
+                @item.PayoutDate.ToShortDateString()
+            </td>
+
+            <td>
+                <a asp-action="LoanDetails" asp-route-id="@item.LoanId">Details</a> |
+                <a asp-action="LoanDelete" asp-route-id="@item.LoanId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
